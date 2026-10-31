@@ -6,6 +6,10 @@ Atualizado em 30 de outubro de 2026.
 
 O usuário solicitou execução de uma etapa por vez e pergunta de autorização ao final de cada etapa. Aguardar resposta afirmativa antes de iniciar a próxima. A aprovação geral do projeto não autoriza avançar por todas as etapas de uma vez.
 
+Em 30/10/2026, o usuário determinou que toda etapa concluída seja salva no Git e no GitHub. Após verificar a etapa e atualizar este registro, criar um commit, enviá-lo ao repositório `fredhansenads/projeto3-task_organizer` e confirmar a sincronização. Informar o commit na entrega e então pedir autorização para a próxima etapa. Não é necessária nova confirmação para esse commit e envio. Se houver falha, registrar a pendência e informar o usuário.
+
+O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, já foi enviado à branch `main` do repositório. A nova regra mantém a etapa 3 aguardando autorização.
+
 ## Situação
 
 | Etapa | Entrega | Situação |

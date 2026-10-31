@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#294f42">
+  <meta name="description" content="Protótipo de avaliação do sistema Minha Rotina Escolar.">
+  <title>Minha Rotina Escolar · Protótipo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <button id="backdrop" class="backdrop" aria-label="Fechar menu" hidden></button>
+  <aside id="sidebar" class="sidebar" aria-label="Navegação principal"></aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="topbar-left"><button class="icon-button menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false"></button><span class="breadcrumb">Minha escola <span>/</span> <strong id="breadcrumb">Visão geral</strong></span></div>
+      <div class="topbar-right"><span class="demo-badge"><span></span> Protótipo</span><span class="year">Ano letivo 2026</span><div class="avatar user-avatar" aria-label="Perfil de demonstração">CO</div></div>
+    </header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="page-footer"><span>Minha Rotina Escolar</span><span>Ambiente de demonstração · Dados fictícios · 29 out 2026</span></footer>
+  </div>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

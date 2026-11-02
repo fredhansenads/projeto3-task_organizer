@@ -1,0 +1,27 @@
+project_id = "minha-rotina-escolar"
+
+[api]
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[studio]
+port = 54323
+
+[local_smtp]
+port = 54324
+
+[auth]
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = ["http://127.0.0.1:3000/redefinir"]
+enable_signup = false
+minimum_password_length = 10
+
+[auth.email.template.recovery]
+subject = "Recuperar acesso à Minha Rotina Escolar"
+content_path = "./supabase/templates/recovery.html"

@@ -1,6 +1,6 @@
 # Andamento do projeto
 
-Atualizado em 30 de outubro de 2026.
+Atualizado em 2 de novembro de 2026.
 
 ## Regra de continuidade
 
@@ -8,7 +8,7 @@ O usuário solicitou execução de uma etapa por vez e pergunta de autorização
 
 Em 30/10/2026, o usuário determinou que toda etapa concluída seja salva no Git e no GitHub. Após verificar a etapa e atualizar este registro, criar um commit, enviá-lo ao repositório `fredhansenads/projeto3-task_organizer` e confirmar a sincronização. Informar o commit na entrega e então pedir autorização para a próxima etapa. Não é necessária nova confirmação para esse commit e envio. Se houver falha, registrar a pendência e informar o usuário.
 
-O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, já foi enviado à branch `main` do repositório. A nova regra mantém a etapa 3 aguardando autorização.
+O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi enviado à branch `main` do repositório.
 
 ## Situação
 
@@ -16,7 +16,7 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, já foi
 | --- | --- | --- |
 | 1 | Definição final e documentação | Concluída e apresentada para avaliação |
 | 2 | Protótipo visual | Concluída e apresentada para avaliação |
-| 3 | Estrutura técnica | Aguardando autorização |
+| 3 | Estrutura técnica | Concluída e testada em ambiente local |
 | 4 | Tarefas e agenda | Não iniciada |
 | 5 | Entregas dos professores | Não iniciada |
 | 6 | Relatórios e validação | Não iniciada |
@@ -51,6 +51,17 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, já foi
 - Guia de avaliação em `etapa-2-prototipo.md`. Captura do painel em `previas/painel-atual.jpg`.
 - Sem banco, autenticação, envio de arquivos ou publicação na internet. Não foram iniciadas as etapas 3 a 8.
 
+## Evidências da etapa 3
+
+- Autorização recebida com a mensagem “Pode iniciar a 3 etapa”.
+- Aplicação, dependências fixadas, migração PostgreSQL, política de anexos privados e modelo de e-mail de recuperação disponíveis no repositório.
+- Compilação da aplicação com verificação de TypeScript aprovada.
+- Migração executada em PostgreSQL em memória. Testados isolamento entre usuários, vínculo com a escola, histórico privado, restrições relacionais e acesso aos caminhos de anexos.
+- Instruções para executar e repetir os testes em [Estrutura técnica](etapa-3-estrutura.md).
+- Supabase local iniciado no Docker e migração aplicada. A aplicação compilada respondeu na porta 3000.
+- Cadastro público rejeitado. Teste pelos formulários da aplicação confirmou entrada, painel com e sem vínculo, saída, entrega da mensagem no e-mail de teste e troca de senha. A senha antiga e a segunda tentativa de usar o mesmo link foram rejeitadas.
+- Arquivo PDF fictício enviado e lido por usuário vinculado. O armazenamento rejeitou um tipo de arquivo incompatível e negou a leitura sem sessão ou após desativar o vínculo escolar.
+
 ## Próxima decisão
 
-Solicitar autorização para a etapa 3: preparar Next.js/TypeScript, banco PostgreSQL/Supabase, autenticação, políticas de acesso e armazenamento privado. Eventuais ajustes visuais solicitados antes dessa autorização permanecem na etapa 2.
+Aguardar autorização para iniciar a etapa 4, que implementará tarefas e agenda na aplicação com banco de dados.

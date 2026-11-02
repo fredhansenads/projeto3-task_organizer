@@ -4,6 +4,7 @@ import {useState} from "react";
 import {type Delivery,stateLabels,reviewLabels,channels} from "../../lib/materiais";
 import {br,display,dueText,late,localDay,localStamp} from "../../lib/rotina";
 import Faculty from "./faculty";
+import {deliveryTotals} from "../../lib/reporting";
 import {Checks,Command,Deadline,SchoolFields,type Context} from "./material-forms";
 
 function Badge({d,now}:{d:Delivery;now:string}) {
@@ -73,7 +74,7 @@ export default function Materials(p:Context) {
   if(screen==="solicitacao"&&!req) return <section><h1>Solicitação indisponível</h1></section>;
   const rows=data.deliveries.filter(d=>screen!=="solicitacao"||d.request_id===selected);
   const shown=rows.filter(d=>(!filter||d.state===filter||d.review===filter) && (d.teacher_name+" "+d.request_title).toLowerCase().includes(query.trim().toLowerCase()));
-  const required=rows.filter(d=>d.state!=="dispensado").length,received=rows.filter(d=>d.state==="recebido").length;
+  const {required,received,approved,rate}=deliveryTotals(shown);
   return <section><small>ACOMPANHAMENTO DE MATERIAIS</small><div className="heading"><h1>{req?req.title:"Entregas dos professores"}</h1><Link className="cta" href={link("nova-solicitacao")}>Nova solicitação</Link></div>
     {req?<><p>{req.material_type} · {req.period} · Prazo padrão: {dueText(req)}</p>
       <p>{[...catalog.years,...catalog.classes,...catalog.subjects].filter(c=>[req.year_id,req.class_id,req.subject_id].includes(c.id)).map(c=>c.name).join(" · ")}</p>
@@ -84,7 +85,7 @@ export default function Materials(p:Context) {
         <Deadline/><label>Justificativa<textarea name="reason" required/></label>
         <Checks label="Aplicar também a estes acompanhamentos" items={rows.map(d=>({id:d.id,name:d.teacher_name}))}/></Command></details></>:
       <><h2>Solicitações</h2>{data.requests.length?<ul className="records">{data.requests.map(r=><li key={r.id}><Link href={link("solicitacao",r.id)}>{r.title}</Link><span>{r.period} · {dueText(r)}</span></li>)}</ul>:<p>Crie a primeira solicitação para acompanhar as entregas.</p>}</>}
-    <h2>Acompanhamentos individuais</h2><p>{received} recebido(s) de {required} exigido(s) · {rows.filter(d=>d.review==="aprovado").length} conferido(s) · Recebimento: {required?Math.round(received/required*100)+"%":"Não se aplica"}</p>
+    <h2>Acompanhamentos individuais</h2><p>{received} recebido(s) de {required} exigido(s) · {approved} conferido(s) · Recebimento: {rate}</p>
     <div className="fields"><label>Buscar professor ou material<input value={query} onChange={e=>setQuery(e.target.value)}/></label>
     <label>Situação<select aria-label="Situação da entrega" value={filter} onChange={e=>setFilter(e.target.value)}><option value="">Todas</option>{Object.entries({...stateLabels,...reviewLabels}).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label></div>
     <ul className="records">{shown.map(d=><li key={d.id}><div><Link href={link("entrega",d.id)}>{d.teacher_name} · {d.request_title}</Link><small>Prazo: {dueText(d)}</small></div><Badge d={d} now={p.now}/></li>)}</ul>{!shown.length&&<p>Nenhum acompanhamento nesta seleção.</p>}</section>;

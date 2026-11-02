@@ -56,4 +56,33 @@ main:has(.school-work) { max-width:74rem; margin:1.4rem auto 4rem; }
 .day a { display:block;font-size:.85rem; margin-top:.45rem; }
 .day.today { background:#eef4e8; border-color:#64846d; }
 [role=alert] { color:#853315; background:#fff2da; padding:.6rem; }
+.report-metrics { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(8rem,100%),1fr));gap:.65rem;margin:1.2rem 0; }
+.report-metrics div { background:#eff3ea;border:1px solid #c7d4c5;border-radius:.55rem;padding:.8rem; }
+.report-metrics dt { font-size:.9rem; }
+.report-metrics dd { font:1.65rem Georgia,serif;margin:.2rem 0 0; }
+.report-controls .tools button { width:auto; }
+.report-scroll { overflow:auto;max-width:100%; }
+.report table { width:100%;font-size:.9rem;border-collapse:collapse; }
+.report caption { text-align:left;font-weight:650;margin:.4rem 0; }
+.report td,.report th { text-align:left;vertical-align:top;padding:.6rem;border-bottom:1px solid #cbd6c8; }
+.report thead { background:#eef3eb; }
+.report tbody a { margin:0;overflow-wrap:anywhere; }
+.report { overflow-wrap:anywhere; }
+.mobile-menu { display:none; }
+@media(max-width:720px) {
+  .school-work .mobile-menu { display:block;margin:1rem 0; }
+  .routine-nav:not(.expanded) { display:none; }
+}
+@media print {
+  @page { margin:12mm;size:A4 landscape; }
+  body:has(.report) { background:white;color:black; }
+  body:has(.report) header,.school-work:has(.report) .school-bar,.school-work:has(.report) .routine-nav,.school-work:has(.report) .mobile-menu,.report-controls { display:none!important; }
+  main:has(.report),.school-work .report { margin:0;padding:0;border:0;max-width:none; }
+  .report-scroll { overflow:visible; }
+  .report table { font-size:9pt;table-layout:fixed; }
+  .report td,.report th { padding:4pt;overflow-wrap:anywhere; }
+  .report tr,.report-metrics { break-inside:avoid; }
+  .report thead { display:table-header-group; }
+  .report a { color:black;text-decoration:none; }
+}
 @media(max-width:720px){ .calendar{grid-template-columns:repeat(2,minmax(0,1fr));} .routine-nav{gap:0;} .routine-nav a{padding:.4rem .55rem;} .school-work section{padding:1.1rem;} }

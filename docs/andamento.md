@@ -19,7 +19,7 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 | 3 | Estrutura técnica | Concluída e testada em ambiente local |
 | 4 | Tarefas e agenda | Concluída e testada em ambiente local |
 | 5 | Entregas dos professores | Concluída e testada em ambiente local |
-| 6 | Relatórios e validação | Não iniciada |
+| 6 | Relatórios e validação | Concluída e testada em ambiente local |
 | 7 | Projeto piloto | Não iniciada |
 | 8 | Publicação e entrega | Não iniciada |
 
@@ -81,6 +81,14 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 - O prazo na agenda abriu a entrega correspondente. Os testes anteriores de tarefas, agenda, recuperação de senha e isolamento também passaram.
 - [Guia para avaliar o módulo](etapa-5-materiais.md).
 
+## Evidências da etapa 6
+
+- Indicadores do painel e relatórios ligados aos registros autorizados da escola. A consulta de histórico respeita as permissões de leitura de cada conta.
+- CSV e impressão verificados na mesma seleção da tela. O teste incluiu um nome que poderia ser interpretado como fórmula e a geração de PDF pelo navegador.
+- Comparação de contagens, filtros por professor, evento e período, acesso por teclado, uso em tela estreita e nova tentativa após falha de conexão aprovados.
+- Testes anteriores de tarefas, materiais, autenticação e isolamento aprovados. Versão, metadados e arquivo foram restaurados em ensaio local com dados fictícios.
+- [Guia e matriz de aceite](etapa-6-relatorios.md).
+
 ## Próxima decisão
 
-Aguardar autorização para iniciar a etapa 6, com indicadores, relatórios, exportação CSV, impressão e validação do sistema.
+Aguardar autorização para iniciar a etapa 7, o piloto com o coordenador e um pequeno conjunto de registros representativos.

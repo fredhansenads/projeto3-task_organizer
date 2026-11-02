@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
+import {writeFile,readFile,unlink,mkdir} from "node:fs/promises";
 import { check } from "./local.mjs";
 
 // Executado somente pelo teste local, na escola temporária criada por ele.
@@ -26,6 +27,28 @@ export async function verifyStorage(admin, actor, anonymous, school, user) {
     assert.ok((await files.download(path)).error,"upload incompleto não permite download");
     check(await confirm());
     assert.equal(await check(await files.download(path)).text(),new TextDecoder().decode(payload));
+    // Ensaio de restauração restrito aos dois UUIDs recém-criados nesta escola de teste.
+    const row=async(table,id)=>check(await actor.from(table).select("*").eq("school_id",school).eq("id",id).single());
+    const snapshot={version:await row("receipt_versions",version),attachment:await row("attachments",attachment),
+      bytes:Buffer.from(await check(await files.download(path)).arrayBuffer()).toString("base64")};
+    await mkdir(".artifacts",{recursive:true});
+    const copy=".artifacts/restore-"+randomUUID()+".json";
+    await writeFile(copy,JSON.stringify(snapshot),{flag:"wx",mode:0o600});
+    try {
+      check(await admin.storage.from("materiais").remove([path]));
+      check(await admin.from("attachments").delete().eq("school_id",school).eq("id",attachment));
+      check(await admin.from("receipt_versions").delete().eq("school_id",school).eq("id",version));
+      assert.ok((await files.download(path)).error);
+      const restored=JSON.parse(await readFile(copy,"utf8"));
+      check(await admin.from("receipt_versions").insert(restored.version));
+      check(await admin.from("attachments").insert({...restored.attachment,ready:false}));
+      check(await files.upload(path,Buffer.from(restored.bytes,"base64"),{contentType:restored.attachment.mime_type}));
+      check(await confirm());
+      assert.deepEqual(await row("receipt_versions",version),snapshot.version);
+      assert.deepEqual(await row("attachments",attachment),snapshot.attachment);
+      assert.deepEqual(Buffer.from(await check(await files.download(path)).arrayBuffer()),Buffer.from(payload));
+    } finally {await unlink(copy);}
+    console.log("Versão recebida, metadados e conteúdo do anexo restaurados da cópia local.");
     assert.ok((await anonymous.storage.from("materiais").download(path)).error);
     check(await admin.from("school_memberships").update({active:false}).eq("school_id",school).eq("user_id",user));
     assert.ok((await files.download(path)).error);

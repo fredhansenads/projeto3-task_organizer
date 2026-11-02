@@ -11,9 +11,12 @@ Sistema web planejado para organização de tarefas de coordenação e docência
 - [Aplicação local e testes da etapa 3](docs/etapa-3-estrutura.md)
 - [Tarefas, realizadas e agenda da etapa 4](docs/etapa-4-rotina.md)
 - [Materiais e entregas dos professores da etapa 5](docs/etapa-5-materiais.md)
+- [Relatórios e evidências de validação da etapa 6](docs/etapa-6-relatorios.md)
 - [Protótipo navegável](prototipo/index.html)
 
 ## Estado atual
+
+Em **Relatórios**, consulte as entregas por professor, as suas tarefas realizadas e o histórico de ações. A tabela, o CSV e a impressão usam os mesmos filtros e critérios.
 
 A coordenação pode organizar tarefas, consultar a agenda e acompanhar materiais por professor, desde a solicitação até a conferência. A aplicação local mantém versões, anexos privados, prazos e dispensas. O guia da etapa 3 explica como iniciar o banco e preparar a conta de demonstração.
 

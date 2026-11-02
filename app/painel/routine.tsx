@@ -5,11 +5,13 @@ import { areas, priorities, statuses, br, display, dueDay, dueText, late, localD
   type Appointment, type Catalog, type Task, type Step, type History } from "../../lib/rotina";
 import { Actions, EventForm, TaskForm } from "./forms";
 import Materials from "./materials";
+import Reports,{Metrics} from "./reports";
+import {currentCompletions,deliveryTotals,type Activity} from "../../lib/reporting";
 import {materialScreens,type Delivery,type MaterialData} from "../../lib/materiais";
 
 type Props={school:string;screen:string;selected:string;now:string;tasks:Task[];steps:Step[];events:Appointment[];history:History[];catalog:Catalog;materials:MaterialData};
 type Href=(screen:string,id?:string)=>string;
-const tabs={inicio:"Início",tarefas:"Minhas tarefas",realizadas:"Realizadas",agenda:"Agenda",entregas:"Entregas",professores:"Professores",cadastros:"Turmas e disciplinas",arquivadas:"Arquivadas"};
+const tabs={inicio:"Início",tarefas:"Minhas tarefas",realizadas:"Realizadas",agenda:"Agenda",entregas:"Entregas",professores:"Professores",cadastros:"Turmas e disciplinas",arquivadas:"Arquivadas",relatorios:"Relatórios"};
 function TaskList({items,link,now}:{items:Task[];link:Href;now:string}) {
   return items.length ? <ul className="records">{items.map(t=><li key={t.id}><div><Link href={link("tarefa",t.id)}>{t.title}</Link>
     <small>{areas[t.area]} · {priorities[t.priority]} · {statuses[t.status]}</small></div>
@@ -72,9 +74,11 @@ function historyText(h:History) {
   }
   return changes.join(" · ")||"Tarefa atualizada";
 }
-export default function Routine(p:Props) {
+export default function Routine(p:Props & {schoolName:string;activity:Activity[]}) {
   const {school,screen,selected,steps,events,tasks,catalog}=p;
   const [now,setNow]=useState(p.now);
+  const [menuOpen,setMenuOpen]=useState(false);
+  const totals=deliveryTotals(p.materials.deliveries);
   useEffect(()=>{setNow(p.now);const timer=setInterval(()=>setNow(new Date().toISOString()),30000);return ()=>clearInterval(timer);},[p.now]);
   const today=localDay(now);
   const link:Href=(screen,id)=>"/painel?"+new URLSearchParams({escola:school,tela:screen,...(id?{id}:{})});
@@ -97,13 +101,18 @@ export default function Routine(p:Props) {
     <h2>Histórico</h2><ul className="history">{[...p.history].sort((a,b)=>b.created_at.localeCompare(a.created_at)).map(h=><li key={h.id}><time>{display(h.created_at)}</time> · {historyText(h)}</li>)}</ul></section>;
   else if(["tarefas","realizadas","arquivadas"].includes(screen)) content=<Tasks key={screen} {...{tasks,screen,link,now,catalog}}/>;
   else if(screen==="agenda") content=<Calendar {...{tasks,events,today,link}} deliveries={p.materials.deliveries}/>;
+  else if(screen==="relatorios") content=<Reports school={p.schoolName} initial={selected} now={now} link={link}
+    source={{tasks,activity:p.activity,catalog,deliveries:p.materials.deliveries,requests:p.materials.requests}}/>;
   else if(materialScreens.includes(screen)) content=<Materials key={screen+selected} {...{school,screen,selected,catalog,link,now}} data={p.materials}/>;
   else if(screen==="novo-compromisso"||screen==="editar-compromisso") content=screen==="editar-compromisso"&&!event?missed:<EventForm key={screen+selected} event={event} school={school} day={today} link={link}/>;
   else if(screen==="compromisso") content=!event?missed:<section><small>COMPROMISSO</small><h1>{event.title}</h1><p>{display(event.starts_at)} até {display(event.ends_at)}</p><p className="multiline">{event.notes}</p><Link className="cta" href={link("editar-compromisso",event.id)}>Editar compromisso</Link></section>;
   else content=<section><small>{br(today)}</small><div className="heading"><h1>Minha rotina de hoje</h1><Link className="cta" href={link("nova")}>Nova tarefa</Link></div>
     <h2>Tarefas de hoje</h2><TaskList items={active.filter(t=>dueDay(t)===today)} link={link} now={now}/>
     <h2>Atrasadas</h2><TaskList items={active.filter(t=>late(t,now))} link={link} now={now}/>
-    <h2>Materiais pendentes</h2><Link href={link("entregas")}>{p.materials.deliveries.filter(d=>d.state==="pendente").length} entrega(s) pendente(s) · Ver solicitações</Link>
+    <h2>Indicadores da escola</h2><Metrics values={[["Minhas tarefas realizadas",currentCompletions(tasks).length],["Materiais exigidos",totals.required],["Recebidos",totals.received],["Conferidos",totals.approved],["Pendentes",totals.pending],["Taxa de recebimento",totals.rate]]}/>
+    <div className="tools"><Link href={link("relatorios")}>Consultar relatório de entregas</Link><Link href={link("relatorios","realizadas")}>Consultar relatório de realizadas</Link></div>
+    <h2>Materiais pendentes</h2><Link href={link("entregas")}>{totals.pending} entrega(s) pendente(s) · Ver solicitações</Link>
     <h2>Próximos compromissos</h2>{upcoming.length?<ul className="records">{upcoming.map(e=><li key={e.id}><Link href={link("compromisso",e.id)}>{e.title}</Link>{display(e.starts_at)}</li>)}</ul>:<p>Nenhum compromisso agendado.</p>}</section>;
-  return <><nav className="routine-nav" aria-label="Rotina escolar">{Object.entries(tabs).map(([k,v])=><Link key={k} aria-current={screen===k?"page":undefined} href={link(k)}>{v}</Link>)}</nav>{content}</>;
+  return <><button className="quiet mobile-menu" aria-controls="routine-nav" aria-expanded={menuOpen} onClick={()=>setMenuOpen(!menuOpen)}>Menu da escola</button>
+    <nav id="routine-nav" className={"routine-nav"+(menuOpen?" expanded":"")} aria-label="Rotina escolar">{Object.entries(tabs).map(([k,v])=><Link key={k} onClick={()=>setMenuOpen(false)} aria-current={screen===k?"page":undefined} href={link(k)}>{v}</Link>)}</nav>{content}</>;
 }

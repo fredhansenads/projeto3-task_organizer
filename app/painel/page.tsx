@@ -3,6 +3,7 @@ import { authClient } from "../../lib/supabase";
 import type { Task, Step, Appointment, SchoolOption, History } from "../../lib/rotina";
 import { logout } from "../actions";
 import Routine from "./routine";
+import type {Activity} from "../../lib/reporting";
 import { materialScreens, type Delivery, type Teacher, type Assignment, type RequestRow, type Receipt, type Attachment, type ChangeLog } from "../../lib/materiais";
 
 export default async function Page({searchParams}:{searchParams:Promise<{escola?:string;tela?:string;id?:string}>}) {
@@ -38,20 +39,22 @@ export default async function Page({searchParams}:{searchParams:Promise<{escola?
   ]);
   const screen=params.tela||"inicio";
   const materials=materialScreens.includes(screen);
+  const reports=screen==="relatorios";
   const deliveryId=screen==="entrega" && /^[a-f\d-]{36}$/i.test(params.id||"") ? params.id : undefined;
-  const [deliveries,teachers,assignments,requests,versions,files,changes]=await Promise.all([
-    materials||screen==="agenda"||screen==="inicio" ? rows<Delivery>("delivery_summary","*") : [],
+  const [deliveries,teachers,assignments,requests,versions,files,changes,activity]=await Promise.all([
+    materials||reports||screen==="agenda"||screen==="inicio" ? rows<Delivery>("delivery_summary","*") : [],
     materials ? rows<Teacher>("teachers","id,name,contact,active") : [],
     screen==="professores" ? rows<Assignment>("teaching_assignments","*") : [],
-    materials ? rows<RequestRow>("material_requests","*") : [],
+    materials||reports ? rows<RequestRow>("material_requests","*") : [],
     deliveryId ? rows<Receipt>("receipt_versions","*",deliveryId,"obligation_id") : [],
     deliveryId ? rows<Attachment>("attachments","id,version_id,file_name,byte_size,ready,receipt_versions!inner(obligation_id)",deliveryId,"receipt_versions.obligation_id") : [],
-    deliveryId ? rows<ChangeLog>("audit_events","id,created_at,before_data,after_data",deliveryId,"record_id") : []
+    deliveryId ? rows<ChangeLog>("audit_events","id,created_at,before_data,after_data",deliveryId,"record_id") : [],
+    reports ? rows<Activity>("task_activity_report","*") : []
   ]);
   return <div className="school-work"><div className="school-bar"><div><small>MINHA ESCOLA</small><strong>{school.name}</strong></div>
     {schools.length>1 && <nav aria-label="Escolher escola">{schools.map(s=><a key={s.id} href={"/painel?escola="+s.id}>{s.name}</a>)}</nav>}
     <form action={logout}><button className="quiet">Sair</button></form></div>
-    <Routine key={school.id} school={school.id} screen={params.tela||"inicio"} selected={params.id||""}
+    <Routine key={school.id} school={school.id} schoolName={school.name} activity={activity} screen={params.tela||"inicio"} selected={params.id||""}
       now={new Date().toISOString()} tasks={tasks} steps={steps} events={events} history={history}
       materials={{deliveries,teachers,assignments,requests,versions,files,history:changes}}
       catalog={{years:years.sort((a,b)=>b.year-a.year).map(y=>({id:y.id,name:String(y.year)})),classes,subjects}} />

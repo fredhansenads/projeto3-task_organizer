@@ -18,9 +18,13 @@ export async function verifyStorage(admin, actor, anonymous, school, user) {
     const obligation = await insert("delivery_obligations",{teacher_id:teacher,request_id:request});
     await insert("receipt_versions",{id:version,obligation_id:obligation,version:1,received_at:new Date().toISOString(),channel:"arquivo"});
     await insert("attachments",{id:attachment,version_id:version,file_name:"teste.pdf",object_path:path,mime_type:"application/pdf",byte_size:payload.length});
+    const confirm=()=>actor.rpc("material_command",{sid:school,op:"confirm",token:randomUUID(),d:{id:attachment}});
+    assert.ok((await confirm()).error,"não se pode confirmar uma reserva vazia");
     assert.ok((await files.upload(path,payload,{contentType:"text/plain"})).error);
     check(await files.upload(path,payload,{contentType:"application/pdf"}));
     uploaded = true;
+    assert.ok((await files.download(path)).error,"upload incompleto não permite download");
+    check(await confirm());
     assert.equal(await check(await files.download(path)).text(),new TextDecoder().decode(payload));
     assert.ok((await anonymous.storage.from("materiais").download(path)).error);
     check(await admin.from("school_memberships").update({active:false}).eq("school_id",school).eq("user_id",user));

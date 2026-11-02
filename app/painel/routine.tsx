@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { areas, priorities, statuses, br, display, dueDay, dueText, late, localDay, localStamp, calendarDays, shiftDay,
   type Appointment, type Catalog, type Task, type Step, type History } from "../../lib/rotina";
 import { Actions, EventForm, TaskForm } from "./forms";
+import Materials from "./materials";
+import {materialScreens,type Delivery,type MaterialData} from "../../lib/materiais";
 
-type Props={school:string;screen:string;selected:string;now:string;tasks:Task[];steps:Step[];events:Appointment[];history:History[];catalog:Catalog};
+type Props={school:string;screen:string;selected:string;now:string;tasks:Task[];steps:Step[];events:Appointment[];history:History[];catalog:Catalog;materials:MaterialData};
 type Href=(screen:string,id?:string)=>string;
-const tabs={inicio:"Início",tarefas:"Minhas tarefas",realizadas:"Realizadas",agenda:"Agenda",arquivadas:"Arquivadas"};
+const tabs={inicio:"Início",tarefas:"Minhas tarefas",realizadas:"Realizadas",agenda:"Agenda",entregas:"Entregas",professores:"Professores",cadastros:"Turmas e disciplinas",arquivadas:"Arquivadas"};
 function TaskList({items,link,now}:{items:Task[];link:Href;now:string}) {
   return items.length ? <ul className="records">{items.map(t=><li key={t.id}><div><Link href={link("tarefa",t.id)}>{t.title}</Link>
     <small>{areas[t.area]} · {priorities[t.priority]} · {statuses[t.status]}</small></div>
@@ -37,7 +39,7 @@ function Tasks({tasks,screen,link,now,catalog}:{tasks:Task[];screen:string;link:
     <p>{items.length} tarefa(s)</p><TaskList items={items} link={link} now={now}/></section>;
 }
 
-function Calendar({tasks,events,today,link}:{tasks:Task[];events:Appointment[];today:string;link:Href}) {
+function Calendar({tasks,events,today,link,deliveries}:{tasks:Task[];events:Appointment[];today:string;link:Href;deliveries:Delivery[]}) {
   const [anchor,setAnchor]=useState(today),[month,setMonth]=useState(false);
   const days=calendarDays(anchor,month);
   function move(delta:number) {
@@ -52,6 +54,7 @@ function Calendar({tasks,events,today,link}:{tasks:Task[];events:Appointment[];t
     <div className="calendar">{days.map(day=><div key={day} className={day===today?"day today":"day"}>
       <strong>{new Intl.DateTimeFormat("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit",timeZone:"UTC"}).format(new Date(day+"T12:00Z"))}</strong>
       {tasks.filter(t=>!t.archived&&dueDay(t)===day).map(t=><Link key={t.id} href={link("tarefa",t.id)}>Prazo · {t.title}</Link>)}
+      {deliveries.filter(d=>d.state!=="dispensado" && (dueDay(d)===day || (d.review==="ajustes" && d.correction_due===day))).map(d=><Link key={d.id} href={link("entrega",d.id)}>{d.review==="ajustes" && d.correction_due===day?"Correção":"Entrega"} · {d.teacher_name} · {d.request_title}</Link>)}
       {events.filter(e=>localDay(e.starts_at)<=day && localDay(e.ends_at)>=day).sort((a,b)=>a.starts_at.localeCompare(b.starts_at)).map(e=><Link key={e.id} href={link("compromisso",e.id)}>{localDay(e.starts_at)===day?localStamp(e.starts_at).slice(11):"Continua"} · {e.title}</Link>)}</div>)}</div></section>;
 }
 function historyText(h:History) {
@@ -93,12 +96,14 @@ export default function Routine(p:Props) {
     <Actions key={task.id+":"+task.revision} task={task} steps={checklist} school={school} link={link}/>
     <h2>Histórico</h2><ul className="history">{[...p.history].sort((a,b)=>b.created_at.localeCompare(a.created_at)).map(h=><li key={h.id}><time>{display(h.created_at)}</time> · {historyText(h)}</li>)}</ul></section>;
   else if(["tarefas","realizadas","arquivadas"].includes(screen)) content=<Tasks key={screen} {...{tasks,screen,link,now,catalog}}/>;
-  else if(screen==="agenda") content=<Calendar {...{tasks,events,today,link}}/>;
+  else if(screen==="agenda") content=<Calendar {...{tasks,events,today,link}} deliveries={p.materials.deliveries}/>;
+  else if(materialScreens.includes(screen)) content=<Materials key={screen+selected} {...{school,screen,selected,catalog,link,now}} data={p.materials}/>;
   else if(screen==="novo-compromisso"||screen==="editar-compromisso") content=screen==="editar-compromisso"&&!event?missed:<EventForm key={screen+selected} event={event} school={school} day={today} link={link}/>;
   else if(screen==="compromisso") content=!event?missed:<section><small>COMPROMISSO</small><h1>{event.title}</h1><p>{display(event.starts_at)} até {display(event.ends_at)}</p><p className="multiline">{event.notes}</p><Link className="cta" href={link("editar-compromisso",event.id)}>Editar compromisso</Link></section>;
   else content=<section><small>{br(today)}</small><div className="heading"><h1>Minha rotina de hoje</h1><Link className="cta" href={link("nova")}>Nova tarefa</Link></div>
     <h2>Tarefas de hoje</h2><TaskList items={active.filter(t=>dueDay(t)===today)} link={link} now={now}/>
     <h2>Atrasadas</h2><TaskList items={active.filter(t=>late(t,now))} link={link} now={now}/>
+    <h2>Materiais pendentes</h2><Link href={link("entregas")}>{p.materials.deliveries.filter(d=>d.state==="pendente").length} entrega(s) pendente(s) · Ver solicitações</Link>
     <h2>Próximos compromissos</h2>{upcoming.length?<ul className="records">{upcoming.map(e=><li key={e.id}><Link href={link("compromisso",e.id)}>{e.title}</Link>{display(e.starts_at)}</li>)}</ul>:<p>Nenhum compromisso agendado.</p>}</section>;
   return <><nav className="routine-nav" aria-label="Rotina escolar">{Object.entries(tabs).map(([k,v])=><Link key={k} aria-current={screen===k?"page":undefined} href={link(k)}>{v}</Link>)}</nav>{content}</>;
 }

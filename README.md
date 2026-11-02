@@ -10,11 +10,12 @@ Sistema web planejado para organização de tarefas de coordenação e docência
 - [Guia de avaliação da etapa 2](docs/etapa-2-prototipo.md)
 - [Aplicação local e testes da etapa 3](docs/etapa-3-estrutura.md)
 - [Tarefas, realizadas e agenda da etapa 4](docs/etapa-4-rotina.md)
+- [Materiais e entregas dos professores da etapa 5](docs/etapa-5-materiais.md)
 - [Protótipo navegável](prototipo/index.html)
 
 ## Estado atual
 
-A coordenação já pode organizar tarefas por área, acompanhar etapas, marcar atividades realizadas e consultar compromissos e prazos na agenda. O acesso é individual, por e-mail e senha. O guia da etapa 3 explica como iniciar o banco local e preparar a conta de demonstração. O guia da etapa 4 descreve a rotina diária e seus testes.
+A coordenação pode organizar tarefas, consultar a agenda e acompanhar materiais por professor, desde a solicitação até a conferência. A aplicação local mantém versões, anexos privados, prazos e dispensas. O guia da etapa 3 explica como iniciar o banco e preparar a conta de demonstração.
 
 ## Abrir o protótipo
 

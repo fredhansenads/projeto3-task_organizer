@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/database.test.mjs tests/time.test.mjs",
     "test:rotina": "node scripts/test-routine.mjs",
+    "test:materiais": "node scripts/test-materials.mjs",
     "test:auth": "node scripts/test-auth.mjs"
   },
   "dependencies": {

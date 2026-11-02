@@ -1,0 +1,13 @@
+export type Choice={id:string;name:string;year_id?:string};
+export type Teacher=Choice & {contact:string|null;active:boolean};
+export type Assignment={id:string;teacher_id:string;year_id:string;class_id:string;subject_id:string;active:boolean};
+export type RequestRow={id:string;title:string;material_type:string|null;period:string|null;year_id:string;class_id:string|null;subject_id:string|null;instructions:string|null;due_date:string|null;due_at:string|null};
+export type Delivery={id:string;request_id:string;teacher_id:string;teacher_name:string;request_title:string;year_id:string;exemption_reason:string|null;revision:number;due_date:string|null;due_at:string|null;state:"pendente"|"recebido"|"dispensado";review:"aguardando"|"ajustes"|"aprovado"|null;correction_due:string|null;first_late:boolean|null};
+export type Receipt={id:string;version:number;received_at:string;created_at:string;channel:string;notes:string|null;review:string;link:string|null;guidance:string|null;correction_due:string|null;invalid_reason:string|null;original_date:string|null;original_at:string|null};
+export type Attachment={id:string;version_id:string;file_name:string;byte_size:number;ready:boolean};
+export type ChangeLog={id:string;created_at:string;before_data:Delivery|null;after_data:Delivery & {change_reason:string|null}};
+export type MaterialData={teachers:Teacher[];assignments:Assignment[];requests:RequestRow[];deliveries:Delivery[];versions:Receipt[];files:Attachment[];history:ChangeLog[]};
+export const materialScreens=["entregas","solicitacao","nova-solicitacao","entrega","professores","cadastros"];
+export const reviewLabels:Record<string,string>={aguardando:"Aguardando conferência",ajustes:"Precisa de ajustes",aprovado:"Conferido"};
+export const stateLabels={pendente:"Pendente",recebido:"Recebido",dispensado:"Dispensado"};
+export const channels:Record<string,string>={papel:"Papel",email:"E-mail",whatsapp:"WhatsApp",outro:"Outro"};

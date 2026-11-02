@@ -18,7 +18,7 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 | 2 | Protótipo visual | Concluída e apresentada para avaliação |
 | 3 | Estrutura técnica | Concluída e testada em ambiente local |
 | 4 | Tarefas e agenda | Concluída e testada em ambiente local |
-| 5 | Entregas dos professores | Não iniciada |
+| 5 | Entregas dos professores | Concluída e testada em ambiente local |
 | 6 | Relatórios e validação | Não iniciada |
 | 7 | Projeto piloto | Não iniciada |
 | 8 | Publicação e entrega | Não iniciada |
@@ -71,6 +71,16 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 - Testes de datas, integridade, falha parcial, isolamento, autenticação e recuperação aprovados. A compilação incluiu a verificação de TypeScript.
 - [Guia de avaliação e execução](etapa-4-rotina.md).
 
+## Evidências da etapa 5
+
+- Cadastros de professores, anos, turmas, disciplinas e vínculos docentes disponíveis no painel. A inativação mantém as obrigações do professor.
+- A solicitação para dez docentes gerou dez acompanhamentos. Repetir o comando preservou o total. A inclusão de um identificador inválido desfez a solicitação inteira.
+- O teste no Edge criou uma solicitação, adicionou professor a outra, registrou material atrasado, pediu ajustes e conferiu a segunda versão. O PDF da primeira continuou disponível após recarregar a página.
+- Prazo individual e mudança coletiva seletiva verificados. A primeira entrega permaneceu atrasada após a prorrogação. Dispensa e reativação alteraram apenas o acompanhamento selecionado.
+- O servidor rejeitou arquivo com extensão incompatível com seu conteúdo. A API bloqueou a leitura de upload pendente e o download sem acesso. Um arquivo confirmado pôde ser baixado com o conteúdo original.
+- O prazo na agenda abriu a entrega correspondente. Os testes anteriores de tarefas, agenda, recuperação de senha e isolamento também passaram.
+- [Guia para avaliar o módulo](etapa-5-materiais.md).
+
 ## Próxima decisão
 
-Aguardar autorização para iniciar a etapa 5, com solicitações e registro das entregas de materiais dos professores.
+Aguardar autorização para iniciar a etapa 6, com indicadores, relatórios, exportação CSV, impressão e validação do sistema.

@@ -17,7 +17,7 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 | 1 | Definição final e documentação | Concluída e apresentada para avaliação |
 | 2 | Protótipo visual | Concluída e apresentada para avaliação |
 | 3 | Estrutura técnica | Concluída e testada em ambiente local |
-| 4 | Tarefas e agenda | Não iniciada |
+| 4 | Tarefas e agenda | Concluída e testada em ambiente local |
 | 5 | Entregas dos professores | Não iniciada |
 | 6 | Relatórios e validação | Não iniciada |
 | 7 | Projeto piloto | Não iniciada |
@@ -62,6 +62,15 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 - Cadastro público rejeitado. Teste pelos formulários da aplicação confirmou entrada, painel com e sem vínculo, saída, entrega da mensagem no e-mail de teste e troca de senha. A senha antiga e a segunda tentativa de usar o mesmo link foram rejeitadas.
 - Arquivo PDF fictício enviado e lido por usuário vinculado. O armazenamento rejeitou um tipo de arquivo incompatível e negou a leitura sem sessão ou após desativar o vínculo escolar.
 
+## Evidências da etapa 4
+
+- Migração aplicada ao Supabase local. O banco grava tarefa, checklist e histórico na mesma transação e verifica o proprietário e a escola nas alterações.
+- No Edge, uma conta temporária criou uma tarefa com prazo, turma, disciplina e checklist. Os dados permaneceram após sair da conta e entrar novamente. Um formulário rejeitado manteve os campos preenchidos para nova tentativa.
+- Conclusão com etapa pendente exigiu confirmação. O reenvio da conclusão preservou um único evento. A reabertura retirou a tarefa de Realizadas e preservou a anotação de conclusão no histórico.
+- Busca, edição de prazo, arquivamento, restauração e retorno da agenda ao registro de origem verificados. Um compromisso atravessando a meia-noite apareceu nos dois dias. As visualizações semanal e mensal foram exercitadas.
+- Testes de datas, integridade, falha parcial, isolamento, autenticação e recuperação aprovados. A compilação incluiu a verificação de TypeScript.
+- [Guia de avaliação e execução](etapa-4-rotina.md).
+
 ## Próxima decisão
 
-Aguardar autorização para iniciar a etapa 4, que implementará tarefas e agenda na aplicação com banco de dados.
+Aguardar autorização para iniciar a etapa 5, com solicitações e registro das entregas de materiais dos professores.

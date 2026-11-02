@@ -22,6 +22,7 @@ test("migração, integridade relacional, isolamento e auditoria", async () => {
       grant select, insert on storage.objects to authenticated;
     `);
     await db.exec(await readFile(new URL("../supabase/migrations/20261102000100_school.sql", import.meta.url), "utf8"));
+    await db.exec(await readFile(new URL("../supabase/migrations/20261102000200_rotina.sql", import.meta.url), "utf8"));
     const [school, other, owner, peer, outsider, teacher, year, request, task] = Array.from({length:9}, () => randomUUID());
     await db.query("insert into schools(id,name) values ($1,'A'),($2,'B')",[school,other]);
     await db.query("insert into auth.users values ($1),($2),($3)",[owner,peer,outsider]);
@@ -50,6 +51,7 @@ test("migração, integridade relacional, isolamento e auditoria", async () => {
       await db.query("select set_config('request.jwt.claim.sub',$1,false)",[user]);
       assert.equal((await db.query("select id from schools")).rows.length,schools);
       assert.equal((await db.query("select id from tasks")).rows.length,tasks);
+      if (user!==owner) await assert.rejects(db.query("select task_transition($1,$2,1,'complete',true,null)",[school,task]),/indisponível/);
       assert.equal((await db.query("select id from audit_events where entity='tasks'")).rows.length,tasks);
       if (user === owner) await db.query("insert into storage.objects values ($1,'materiais')",[path]);
       assert.equal((await db.query("select name from storage.objects")).rows.length,schools);

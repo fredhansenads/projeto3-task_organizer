@@ -9,11 +9,12 @@ Sistema web planejado para organização de tarefas de coordenação e docência
 - [Andamento e aprovações](docs/andamento.md)
 - [Guia de avaliação da etapa 2](docs/etapa-2-prototipo.md)
 - [Aplicação local e testes da etapa 3](docs/etapa-3-estrutura.md)
+- [Tarefas, realizadas e agenda da etapa 4](docs/etapa-4-rotina.md)
 - [Protótipo navegável](prototipo/index.html)
 
 ## Estado atual
 
-A aplicação Next.js tem acesso por e-mail e senha, recuperação de acesso e painel de escolas por usuário. O guia da etapa 3 explica como iniciar o banco local no Docker, preparar a conta de demonstração e executar os testes. O documento Word contém o planejamento original. O registro de andamento acompanha cada entrega.
+A coordenação já pode organizar tarefas por área, acompanhar etapas, marcar atividades realizadas e consultar compromissos e prazos na agenda. O acesso é individual, por e-mail e senha. O guia da etapa 3 explica como iniciar o banco local e preparar a conta de demonstração. O guia da etapa 4 descreve a rotina diária e seus testes.
 
 ## Abrir o protótipo
 

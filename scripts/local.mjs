@@ -57,5 +57,9 @@ export async function setup() {
   check(await admin.from("schools").upsert({ id: school, name: "Escola de demonstração" }));
   check(await admin.from("profiles").upsert({ id: user.id, display_name: "Coordenação" }));
   check(await admin.from("school_memberships").upsert({ school_id: school, user_id: user.id }));
+  const year = Number(new Intl.DateTimeFormat("pt-BR",{timeZone:"America/Sao_Paulo",year:"numeric"}).format(new Date()));
+  const academic = check(await admin.from("academic_years").upsert({school_id:school,year},{onConflict:"school_id,year"}).select("id").single());
+  check(await admin.from("classes").upsert({school_id:school,year_id:academic.id,name:"6º A"},{onConflict:"school_id,year_id,name",ignoreDuplicates:true}));
+  check(await admin.from("subjects").upsert({school_id:school,name:"Matemática"},{onConflict:"school_id,name",ignoreDuplicates:true}));
   console.log("Escola local preparada. A conta fictícia está em .env.demo.local.");
 }

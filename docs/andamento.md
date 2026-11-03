@@ -1,6 +1,6 @@
 # Andamento do projeto
 
-Atualizado em 2 de novembro de 2026.
+Atualizado em 3 de novembro de 2026.
 
 ## Regra de continuidade
 
@@ -20,7 +20,7 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 | 4 | Tarefas e agenda | Concluída e testada em ambiente local |
 | 5 | Entregas dos professores | Concluída e testada em ambiente local |
 | 6 | Relatórios e validação | Concluída e testada em ambiente local |
-| 7 | Projeto piloto | Não iniciada |
+| 7 | Projeto piloto | Concluída, com aceite do coordenador |
 | 8 | Publicação e entrega | Não iniciada |
 
 ## Evidências da etapa 1
@@ -89,6 +89,10 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 - Testes anteriores de tarefas, materiais, autenticação e isolamento aprovados. Versão, metadados e arquivo foram restaurados em ensaio local com dados fictícios.
 - [Guia e matriz de aceite](etapa-6-relatorios.md).
 
+## Evidências da etapa 7
+
+O coordenador aprovou o piloto da escola local **Escola Horizonte · Piloto** com a mensagem “Piloto aprovado.” O [registro da rodada](etapa-7-piloto.md) reúne o cenário avaliado, a verificação inicial e o aceite. Nenhum ajuste foi solicitado no retorno.
+
 ## Próxima decisão
 
-Aguardar autorização para iniciar a etapa 7, o piloto com o coordenador e um pequeno conjunto de registros representativos.
+Aguardar autorização para iniciar a etapa 8, de publicação e entrega. O primeiro passo será confirmar a hospedagem, as configurações e os custos com o coordenador.

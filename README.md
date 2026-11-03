@@ -12,6 +12,7 @@ Sistema web planejado para organização de tarefas de coordenação e docência
 - [Tarefas, realizadas e agenda da etapa 4](docs/etapa-4-rotina.md)
 - [Materiais e entregas dos professores da etapa 5](docs/etapa-5-materiais.md)
 - [Relatórios e evidências de validação da etapa 6](docs/etapa-6-relatorios.md)
+- [Roteiro de avaliação do piloto da etapa 7](docs/etapa-7-piloto.md)
 - [Protótipo navegável](prototipo/index.html)
 
 ## Estado atual

@@ -1,4 +1,7 @@
 .artifacts/
+.notebook/
+backups/
+*.lnk
 node_modules/
 .next/
 .env*

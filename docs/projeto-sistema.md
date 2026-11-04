@@ -130,7 +130,7 @@ Os estados terão texto e cor, sem depender apenas da cor. Navegação por tecla
 
 ## Tecnologias e organização dos dados
 
-TypeScript será a linguagem principal. Next.js com React organizará interface e operações de servidor. CSS com Tailwind CSS definirá a apresentação. PostgreSQL no Supabase armazenará dados; Supabase Auth cuidará da autenticação e Supabase Storage dos anexos privados. Vercel é a hospedagem proposta.
+TypeScript será a linguagem principal. Next.js com React organizará interface e operações de servidor. CSS com Tailwind CSS definirá a apresentação. PostgreSQL no Supabase armazenará dados; Supabase Auth cuidará da autenticação e Supabase Storage dos anexos privados. Em 04/11/2026, o coordenador optou por manter aplicação, banco e anexos no próprio notebook, adiando a hospedagem.
 
 Git e um repositório privado no GitHub registrarão o código quando essa estrutura for preparada. Vitest verificará regras e Playwright verificará fluxos pelo navegador. Versões compatíveis serão fixadas na etapa técnica, com arquivo de dependências travadas.
 
@@ -177,7 +177,7 @@ Desenvolvimento e testes usarão dados fictícios. Dados reais entrarão no pilo
 
 A rotina de backup abrangerá banco e arquivos. Como meta inicial de operação, propõe-se cópia diária e retenção de 30 dias; mecanismo, custo e capacidade deverão ser confirmados antes da produção. Será executado um teste de restauração. Exportar CSV não substitui backup completo.
 
-Hospedagem, armazenamento, domínio opcional e envio de e-mail podem ter custos. Planos e limites serão apresentados antes de contratação. A publicação ocorrerá na etapa 8, após aprovação específica daquela etapa. O uso inicial dependerá de internet.
+Por decisão de 04/11/2026, a etapa 8 entrega a operação local, sem contratação de hospedagem. Depois da instalação inicial, tarefas, agenda e anexos locais funcionam sem depender de internet; links externos mantêm essa dependência. Hospedagem, domínio e e-mail externo serão avaliados no futuro, com autorização específica.
 
 **Referências técnicas**
 
@@ -219,9 +219,9 @@ Conectar os indicadores do painel, relatórios, CSV e impressão aos dados reais
 
 Usar poucos registros representativos com o coordenador: tarefas, professores e materiais. Verificar clareza das telas e aderência à rotina. Registrar os ajustes necessários, corrigir os problemas e repetir os cenários afetados. Saída: aceite do piloto.
 
-**Etapa 8 Publicação e entrega**
+**Etapa 8 Uso no notebook e entrega — escopo atualizado em 04/11/2026**
 
-Confirmar custos e configurações; publicar na hospedagem aprovada; configurar domínio se escolhido. Executar verificação de produção, backup e restauração. Entregar código, migrações, instruções de configuração e uso, e registro de limitações conhecidas. Saída: sistema disponível e operação documentada.
+Preparar atalhos de inicialização, backup diário na abertura e backup manual. Verificar recuperação em ambiente isolado, preservar os dados do piloto e entregar instruções de uso, encerramento, recuperação de senha e cópia externa. Saída: sistema utilizável no notebook e operação documentada. Publicação e subdomínio ficam adiados. O guia vigente é `etapa-8-notebook.md`; o documento Word original registra o planejamento inicial.
 
 Ao fim de cada etapa, registrar resultado e evidências, solicitar autorização e aguardar. O cronograma será estimado após o protótipo e a confirmação do ambiente, sem tratar previsões como datas garantidas.
 

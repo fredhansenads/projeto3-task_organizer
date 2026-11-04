@@ -7,6 +7,12 @@
     "node": ">=22.12"
   },
   "scripts": {
+    "local:iniciar": "node scripts/notebook.mjs start",
+    "local:encerrar": "node scripts/notebook.mjs stop",
+    "local:backup": "node scripts/notebook.mjs backup",
+    "local:verificar": "node scripts/notebook.mjs verify",
+    "local:restaurar": "node scripts/notebook.mjs restore-empty",
+    "test:notebook": "node scripts/test-notebook.mjs",
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",

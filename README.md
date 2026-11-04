@@ -13,9 +13,12 @@ Sistema web planejado para organização de tarefas de coordenação e docência
 - [Materiais e entregas dos professores da etapa 5](docs/etapa-5-materiais.md)
 - [Relatórios e evidências de validação da etapa 6](docs/etapa-6-relatorios.md)
 - [Roteiro de avaliação do piloto da etapa 7](docs/etapa-7-piloto.md)
+- [Uso no notebook, atalhos, backup e recuperação — etapa 8](docs/etapa-8-notebook.md)
 - [Protótipo navegável](prototipo/index.html)
 
 ## Estado atual
+
+O uso aprovado é **local, no notebook**. Abra **Iniciar sistema.cmd** ou o atalho **Minha Rotina Escolar**, na Área de Trabalho. O navegador abrirá em http://127.0.0.1:3000. A janela de inicialização deve permanecer aberta. Ao terminar o trabalho, execute **Fazer backup.cmd** e então pressione Ctrl+C na janela do sistema. Consulte o [guia local](docs/etapa-8-notebook.md) para recuperar a senha e guardar uma cópia externa.
 
 Em **Relatórios**, consulte as entregas por professor, as suas tarefas realizadas e o histórico de ações. A tabela, o CSV e a impressão usam os mesmos filtros e critérios.
 
@@ -51,4 +54,4 @@ Commit e envio ao GitHub já estão autorizados para o encerramento de cada etap
 
 ## Tecnologias planejadas
 
-TypeScript, Next.js, React, Tailwind CSS, PostgreSQL, Supabase Auth e Storage. As versões estão fixadas em `package.json` e `pnpm-lock.yaml`. Hospedagem proposta na Vercel para a etapa 8.
+TypeScript, Next.js, React, Tailwind CSS, PostgreSQL, Supabase Auth e Storage. As versões estão fixadas em `package.json` e `pnpm-lock.yaml`. Aplicação e dados funcionam no notebook; hospedagem e domínio ficam para avaliação futura.

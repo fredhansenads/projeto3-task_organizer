@@ -1,6 +1,6 @@
 # Andamento do projeto
 
-Atualizado em 3 de novembro de 2026.
+Atualizado em 4 de novembro de 2026.
 
 ## Regra de continuidade
 
@@ -21,7 +21,7 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 | 5 | Entregas dos professores | Concluída e testada em ambiente local |
 | 6 | Relatórios e validação | Concluída e testada em ambiente local |
 | 7 | Projeto piloto | Concluída, com aceite do coordenador |
-| 8 | Publicação e entrega | Não iniciada |
+| 8 | Uso no notebook e entrega | Concluída e testada; aguardando avaliação do coordenador |
 
 ## Evidências da etapa 1
 
@@ -93,6 +93,19 @@ O commit `b82be96`, contendo a documentação e o protótipo da etapa 2, foi env
 
 O coordenador aprovou o piloto da escola local **Escola Horizonte · Piloto** com a mensagem “Piloto aprovado.” O [registro da rodada](etapa-7-piloto.md) reúne o cenário avaliado, a verificação inicial e o aceite. Nenhum ajuste foi solicitado no retorno.
 
-## Próxima decisão
+## Evidências da etapa 8
 
-Aguardar autorização para iniciar a etapa 8, de publicação e entrega. O primeiro passo será confirmar a hospedagem, as configurações e os custos com o coordenador.
+- Uso no notebook autorizado com “sim, pode”, após a decisão de adiar a publicação.
+- Atalhos para iniciar, fazer backup e encerrar instalados na Área de Trabalho. A aplicação roda compilada, preserva a conta e os registros do piloto e abre em `http://127.0.0.1:3000`.
+- Backup completo criado com PostgreSQL, usuários, permissões, histórico, arquivos e configuração. Cópias automáticas na primeira abertura de cada dia e cópias manuais disponíveis; nenhuma exclusão automática.
+- Banco e volume de arquivos restaurados em recursos temporários isolados. Registros e bytes comparados, incluindo um PDF de uma escola fictícia criada e removida pelo teste. A cópia alterada e a tentativa de restaurar sobre volumes existentes foram rejeitadas.
+- Compilação com TypeScript e testes de integridade, isolamento e datas aprovados. Entrada, saída, recuperação de senha, autorização dos anexos e painel do piloto verificados; o navegador acessou o painel com requisições externas bloqueadas.
+- Abertura repetida detectou a aplicação existente; o comando de encerramento fechou somente a aplicação iniciada pelo atalho. Os serviços de outro projeto Docker permaneceram parados e não foram modificados.
+- Backups, configuração e credenciais locais conferidos como ignorados pelo Git. A cópia externa depende de o coordenador copiar uma pasta concluída para seu dispositivo de backup; nenhum dispositivo externo foi escolhido nesta etapa.
+- [Guia de uso, recuperação e limitações](etapa-8-notebook.md). Aguardar a avaliação antes de novos ajustes ou de qualquer futura publicação.
+
+## Decisão de hospedagem
+
+Em 04/11/2026, o coordenador decidiu usar o próprio notebook por um bom período e aprovou preparar atalhos, backup e instruções. A publicação foi adiada. O subdomínio `tarefas.fredhansen.com.br` permanece como preferência futura; não houve alteração de DNS nem contratação. A proposta AWS está arquivada em `etapa-8-aws.md`.
+
+O [guia da etapa 8](etapa-8-notebook.md) passa a orientar a operação atual. O documento Word da etapa 1 permanece como registro do planejamento original.

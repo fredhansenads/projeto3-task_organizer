@@ -3,7 +3,7 @@ chcp 65001 >nul
 cd /d "%~dp0"
 title Verificar backup - Minha Rotina Escolar
 if "%~1"=="" goto instructions
-node scripts\notebook.mjs verify "%~1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\run-notebook.ps1" verify "%~1"
 pause
 exit /b
 :instructions

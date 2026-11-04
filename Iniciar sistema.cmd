@@ -2,5 +2,5 @@
 chcp 65001 >nul
 cd /d "%~dp0"
 title Minha Rotina Escolar
-node scripts\notebook.mjs start
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\run-notebook.ps1" start
 if errorlevel 1 pause

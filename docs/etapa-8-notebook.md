@@ -79,6 +79,7 @@ Na tela de entrada, use **Esqueci minha senha** com o e-mail da conta. As mensag
 | Situação | O que fazer |
 | --- | --- |
 | Docker não inicia | Abra o Docker Desktop, aguarde o mecanismo Linux ficar pronto e repita o atalho |
+| `node` não é reconhecido | Os atalhos atualizados usam a cópia privada em `.notebook/runtime/node.exe`. Recrie-os com o instalador abaixo se essa pasta foi removida |
 | Porta 3000 ocupada | Se já houver uma janela deste sistema, use-a; se outro programa usar a porta, encerre esse programa antes |
 | Inicialização ou backup já em andamento | Aguarde a outra janela; uma operação não concorre com a outra |
 | Pasta `.incompleto` | Corrija o erro informado, como falta de espaço, e faça outra cópia; não use a incompleta |
@@ -95,6 +96,7 @@ Não use `docker volume prune`, limpeza de dados/factory reset do Docker nem `su
 - O fluxo de inicialização não aplica migrações destrutivas, atualiza dependências nem recria dados do piloto. Atualizações futuras precisam de backup e validação próprios.
 - A restauração física exige a imagem PostgreSQL compatível. Os arquivos lógicos auxiliam uma migração futura, que deverá incluir Auth, permissões e anexos, além do banco.
 - Atalhos da Área de Trabalho podem ser recriados com `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-shortcuts.ps1`. Se mover a pasta do projeto, recrie os atalhos.
+- O instalador copia o executável Node.js para `.notebook/runtime/node.exe`, fora do Git, e os atalhos o localizam sem depender do PATH do Codex. Para uma nova instalação sem Node no PATH, informe `-NodeExecutable "C:\caminho\node.exe"` ao instalador. Essa cópia não exige que o Codex esteja aberto e não é atualizada automaticamente; a troca de versão deve ser validada com o sistema.
 
 Referências: [CLI local do Supabase](https://supabase.com/docs/reference/cli/introduction) e [operação própria do Next.js](https://nextjs.org/docs/app/guides/self-hosting). As regras de execução do Next.js também foram conferidas na documentação instalada da versão fixada no projeto.
 

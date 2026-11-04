@@ -104,6 +104,10 @@ O coordenador aprovou o piloto da escola local **Escola Horizonte · Piloto** co
 - Backups, configuração e credenciais locais conferidos como ignorados pelo Git. A cópia externa depende de o coordenador copiar uma pasta concluída para seu dispositivo de backup; nenhum dispositivo externo foi escolhido nesta etapa.
 - [Guia de uso, recuperação e limitações](etapa-8-notebook.md). Aguardar a avaliação antes de novos ajustes ou de qualquer futura publicação.
 
+## Correção dos atalhos após avaliação
+
+O coordenador informou que o Windows exibia `node não é reconhecido` ao abrir o sistema. O Node usado nos testes anteriores estava no PATH do ambiente Codex, mas não no PATH da Área de Trabalho. O instalador agora prepara uma cópia privada do executável em `.notebook/runtime/node.exe`, e os quatro arquivos CMD usam um iniciador PowerShell que encontra essa cópia e disponibiliza seu diretório somente ao processo da aplicação. Atalhos reinstalados; abertura real pelo CMD e resposta HTTP 200 verificadas com o PATH normal do Windows, sem Node do Codex. Encerramento também verificado nesse ambiente. O executável privado continua ignorado pelo Git.
+
 ## Decisão de hospedagem
 
 Em 04/11/2026, o coordenador decidiu usar o próprio notebook por um bom período e aprovou preparar atalhos, backup e instruções. A publicação foi adiada. O subdomínio `tarefas.fredhansen.com.br` permanece como preferência futura; não houve alteração de DNS nem contratação. A proposta AWS está arquivada em `etapa-8-aws.md`.

@@ -108,6 +108,10 @@ O coordenador aprovou o piloto da escola local **Escola Horizonte · Piloto** co
 
 O coordenador informou que o Windows exibia `node não é reconhecido` ao abrir o sistema. O Node usado nos testes anteriores estava no PATH do ambiente Codex, mas não no PATH da Área de Trabalho. O instalador agora prepara uma cópia privada do executável em `.notebook/runtime/node.exe`, e os quatro arquivos CMD usam um iniciador PowerShell que encontra essa cópia e disponibiliza seu diretório somente ao processo da aplicação. Atalhos reinstalados; abertura real pelo CMD e resposta HTTP 200 verificadas com o PATH normal do Windows, sem Node do Codex. Encerramento também verificado nesse ambiente. O executável privado continua ignorado pelo Git.
 
+## Cadastro da escola para uso real
+
+A pedido do coordenador, a **Escola Fred Hansen** foi cadastrada no banco local e vinculada à conta existente, com ano letivo de 2026. A seleção no painel foi confirmada no navegador autenticado. Tarefas, compromissos, professores, turmas, disciplinas e solicitações começam vazios; as escolas anteriores foram preservadas. O procedimento administrativo reproduzível está em `scripts/setup-school.mjs`; os dados da escola permanecem no banco local, não no GitHub.
+
 ## Decisão de hospedagem
 
 Em 04/11/2026, o coordenador decidiu usar o próprio notebook por um bom período e aprovou preparar atalhos, backup e instruções. A publicação foi adiada. O subdomínio `tarefas.fredhansen.com.br` permanece como preferência futura; não houve alteração de DNS nem contratação. A proposta AWS está arquivada em `etapa-8-aws.md`.

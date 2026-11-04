@@ -13,6 +13,12 @@ Os dados do piloto permanecem disponíveis. O atalho não recria escolas, não t
 
 Após a instalação e o download inicial das dependências e imagens, o uso de tarefas, agenda, relatórios e anexos locais não exige um serviço na internet. Links de materiais hospedados em outros sites continuam dependendo de internet. O computador precisa estar ligado e os serviços locais em execução.
 
+## Escola para uso real
+
+A **Escola Fred Hansen** foi cadastrada a pedido do coordenador e vinculada ao mesmo login local, com o ano letivo de 2026. Para iniciar sua agenda, selecione esse nome na seção **Escolher escola** do painel. Ela começa sem tarefas, compromissos, professores, turmas, disciplinas ou entregas fictícias. As escolas de demonstração e piloto continuam disponíveis separadamente.
+
+O cadastro administrativo local pode ser repetido com `node scripts/setup-school.mjs "Nome da escola"`, com o Supabase ativo. O procedimento cria escola, vínculo e ano letivo em uma transação; uma escola do mesmo nome já vinculada à conta é reutilizada sem apagar seus registros. Isso não adiciona um botão de cadastro de escolas à interface.
+
 ## Terminar de trabalhar
 
 1. Salve as alterações nos formulários.
